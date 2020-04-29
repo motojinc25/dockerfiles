@@ -8,6 +8,10 @@
 - OpenCV 4.1.0.25
 - OpenVINO™ toolkit 2020.1.23
 
+## GitHub
+
+https://github.com/motoJinC25/dockerfiles/tree/master/arm32v7/buster/openvino
+
 ## Docker Hub
 
 https://registry.hub.docker.com/repository/docker/motojinc25/arm32v7-buster-openvino
@@ -15,18 +19,20 @@ https://registry.hub.docker.com/repository/docker/motojinc25/arm32v7-buster-open
 ## Using
 
 ```bash
-# To download the .bin file with weights
-$ wget https://download.01.org/opencv/2019/open_model_zoo/R3/20190905_163000_models_bin/face-detection-retail-0004/FP16/face-detection-retail-0004.bin
-
-# To download the .xml file with the network topology
-$ wget https://download.01.org/opencv/2019/open_model_zoo/R3/20190905_163000_models_bin/face-detection-retail-0004/FP16/face-detection-retail-0004.xml
-
 # Run arm32v7-buster-openvino container
 $ docker run -it --rm --net=host --privileged -v /dev:/dev motojinc25/rpi-buster-openvino:latest /bin/bash
 
-# Connected Neural Compute Stick and Test OpenVINO toolket
+# To download the .bin file with weights
+root@raspberrypi:/# wget https://download.01.org/opencv/2019/open_model_zoo/R3/20190905_163000_models_bin/face-detection-retail-0004/FP16/face-detection-retail-0004.bin
+
+# To download the .xml file with the network topology
+root@raspberrypi:/# wget https://download.01.org/opencv/2019/open_model_zoo/R3/20190905_163000_models_bin/face-detection-retail-0004/FP16/face-detection-retail-0004.xml
+
+# Check Neural Compute Stick
 root@raspberrypi:/# lsusb | grep VPU
 Bus 001 Device 010: ID 03e7:2150 Intel Myriad VPU [Movidius Neural Compute Stick]
+
+# Test OpenVINO toolket
 root@raspberrypi:/# source /opt/intel/openvino/bin/setupvars.sh
 [setupvars.sh] 64 bitness for Python 3.7 is requred
 [setupvars.sh] OpenVINO environment initialized
