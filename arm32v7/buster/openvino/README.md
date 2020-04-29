@@ -32,7 +32,7 @@ root@raspberrypi:/# wget https://download.01.org/opencv/2019/open_model_zoo/R3/2
 root@raspberrypi:/# lsusb | grep VPU
 Bus 001 Device 010: ID 03e7:2150 Intel Myriad VPU [Movidius Neural Compute Stick]
 
-# Test OpenVINO toolket
+# Test OpenVINO toolkit
 root@raspberrypi:/# source /opt/intel/openvino/bin/setupvars.sh
 [setupvars.sh] 64 bitness for Python 3.7 is requred
 [setupvars.sh] OpenVINO environment initialized
