@@ -1,5 +1,5 @@
 # Set base OS image
-FROM balenalib/raspberrypi3-debian:buster-build-20200207
+FROM balenalib/raspberrypi3-debian:buster-build-20200420
 
 # Update package index and install dependencies
 RUN install_packages \
@@ -14,7 +14,7 @@ RUN install_packages \
     libboost-python1.62.0 \
     curl \
     vim \
-    libcurl4-openssl-dev 
+    libcurl4-openssl-dev
 
 # Required for OpenCV
 RUN install_packages \
@@ -28,20 +28,18 @@ RUN install_packages \
 RUN rm -rf /var/lib/apt/lists/* \
     && apt-get -y autoremove
 
-# Download OpenVINO File and extract
+# Install OpenVINO Toolkit
 RUN mkdir -p /opt/intel/openvino && \
     cd /opt/intel/openvino && \
     wget -c https://download.01.org/opencv/2020/openvinotoolkit/2020.1/l_openvino_toolkit_runtime_raspbian_p_2020.1.023.tgz && \
     tar xf l_openvino_toolkit_runtime_raspbian_p*.tgz --strip 1 -C /opt/intel/openvino
 
 # Add USB rules
-RUN sudo usermod -a -G users "$(whoami)" && \
-    /bin/bash -c "source /opt/intel/openvino/bin/setupvars.sh && \
+RUN usermod -a -G users "$(whoami)"
+RUN /bin/bash -c "source /opt/intel/openvino/bin/setupvars.sh && \
     sh /opt/intel/openvino/install_dependencies/install_NCS_udev_rules.sh"
 
-# Install Python packages
+# Install OpenCV
 RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade setuptools
-RUN pip3 install numpy
 RUN pip3 install opencv-contrib-python==4.1.0.25
-
